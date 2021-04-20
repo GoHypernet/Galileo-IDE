@@ -8,7 +8,8 @@ be specified at build-time via package.json or added during an active user sessi
 
 ![alt](./screenshot.png)
 
-The container runtime is currently built on top of continuumio/miniconda3. 
+The container runtime is currently built on top of the [continuumio/miniconda3](https://hub.docker.com/r/continuumio/miniconda3)
+base image. 
 
 The Galileo IDE provides authentication and reverse proxy functionality 
 via [Caddy 2](https://caddyserver.com/docs/) and uses supervisord for 
@@ -29,7 +30,9 @@ To launch an instance of the IDE, run:
 
 `docker run -d --rm --name galileo-ide -p 8888:8888 galileo-ide`
 
-Then open a webbrowser to http://127.0.0.1:8888. 
+Then open a webbrowser to http://127.0.0.1:8888. The username and password will be
+whatever is specified in the Dockerfile for the environment variables USERNAME and
+PASSWORD (i.e. myuser and testpass2 by default). 
 
 # Stop
 

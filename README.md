@@ -27,6 +27,8 @@ To launch an instance of the IDE, run:
 
 `docker run -d --rm --name galileo-ide -p 8888:8888 galileo-ide`
 
+Then open a webbrowser to http://127.0.0.1:8888. 
+
 # Stop
 
 To stop the IDE, run:

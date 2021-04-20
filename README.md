@@ -16,7 +16,8 @@ Additional reverse-proxy ports can be added to the Caddyfile.
 
 # Build
 
-To build a local version of the IDE, run the following command in the root of the project:
+To build a local version of the IDE, first uncomment the basic authentication commands at 
+the bottom of the Dockerfile. Then run the following command in the root of the project:
 
 `docker build -t galileo-ide .`
 

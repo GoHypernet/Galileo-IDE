@@ -1,3 +1,5 @@
+![alt](./galileo_pres.png)
+
 ## Galileo IDE
 
 The Galileo IDE is based on the [Theia project](https://theia-ide.org/).

@@ -9,11 +9,11 @@ RUN apt update -y && apt install vim curl gcc g++ make libx11-dev libxkbfile-dev
 	apt install -y nodejs && \
 	npm install --global yarn
 
-# create a build directory for the theia app
+# create a build directory for the IDE
 RUN mkdir /theia
 WORKDIR /theia
 
-# build the theia app
+# build the IDE
 COPY package.json .
 RUN yarn --pure-lockfile && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
@@ -44,10 +44,11 @@ COPY --from=caddy-build /usr/bin/caddy /usr/bin/caddy
 COPY Caddyfile /etc/
 
 # set login credintials and write them to text file
-ENV USERNAME "myuser"
-ENV PASSWORD "testpass2"
-RUN echo "basicauth /* {" >> /tmp/hashpass.txt && \
-    echo "    {env.USERNAME}" $(caddy hash-password -plaintext $(echo $PASSWORD)) >> /tmp/hashpass.txt && \
-    echo "}" >> /tmp/hashpass.txt
+# uncomment these lines if testing locally
+#ENV USERNAME "myuser"
+#ENV PASSWORD "testpass2"
+#RUN echo "basicauth /* {" >> /tmp/hashpass.txt && \
+#    echo "    {env.USERNAME}" $(caddy hash-password -plaintext $(echo $PASSWORD)) >> /tmp/hashpass.txt && \
+#    echo "}" >> /tmp/hashpass.txt
 
 CMD ["sh", "-c", "supervisord"]

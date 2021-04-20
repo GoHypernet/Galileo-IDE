@@ -1,6 +1,6 @@
 ![alt](./galileo_pres.png)
 
-## Galileo IDE
+# Galileo IDE
 
 The [Galileo](https://hypernetlabs.io/galileo/) IDE is based on the [Theia project](https://theia-ide.org/).
 Components are added via dependencies in package.json. Additional functionality can be added plugins which can
@@ -17,14 +17,14 @@ the startup sequence.
 
 Additional reverse-proxy ports can be added to the Caddyfile. 
 
-# Build
+## Build
 
 To build a local version of the IDE, first uncomment the basic authentication commands at 
 the bottom of the Dockerfile. Then run the following command in the root of the project:
 
 `docker build -t galileo-ide .`
 
-# Run
+## Run
 
 To launch an instance of the IDE, run:
 
@@ -34,13 +34,13 @@ Then open a webbrowser to http://127.0.0.1:8888. The username and password will 
 whatever is specified in the Dockerfile for the environment variables USERNAME and
 PASSWORD (i.e. myuser and testpass2 by default). 
 
-# Stop
+## Stop
 
 To stop the IDE, run:
 
 `docker kill galileo-ide`
 
-# TODO: 
+## TODO: 
 - custom preview page (via @theia/preview dependency)
 - extensible reverse proxy options
 - working directory configuration

@@ -44,3 +44,4 @@ To stop the IDE, run:
 - custom preview page (via @theia/preview dependency)
 - extensible reverse proxy options
 - working directory configuration
+- fix interactive execution window for python

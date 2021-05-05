@@ -26,7 +26,10 @@ the bottom of the Dockerfile. Then run the following command in the root of the 
 Import the image built from this repository as a stage of a multi-stage build. 
 
 ```
-FROM mcr.microsoft.com/windows:1809 AS ide
+FROM galileo-ide AS ide
+# do nothing here, just import
+
+FROM mcr.microsoft.com/windows:1809
 
 COPY --from=ide "C:\Users\Public\theia" "C:\Users\Public\galileo_ide"
 

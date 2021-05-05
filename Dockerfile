@@ -1,5 +1,5 @@
 # build the IDE
-FROM mcr.microsoft.com/windows:1809
+FROM mcr.microsoft.com/windows:1809 as build
 
 # get app specs and set working directory
 COPY package.json "C:\Users\Public\galileo-ide\package.json"
@@ -30,3 +30,13 @@ RUN C:\TEMP\install.cmd C:\TEMP\vs_buildtools.exe \
 RUN yarn --pure-lockfile
 RUN yarn theia build
 RUN yarn theia download:plugins
+RUN yarn --production
+RUN yarn autoclean --init
+RUN echo *.ts >> .yarnclean
+RUN echo *.ts.map >> .yarnclean
+RUN echo *.spec.>> .yarnclean
+RUN yarn autoclean --force
+
+FROM mcr.microsoft.com/windows:1809
+
+COPY --from=build /Users/Public/galileo-ide /Users/Public/galileo-ide

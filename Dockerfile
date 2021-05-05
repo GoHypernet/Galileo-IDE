@@ -2,8 +2,8 @@
 FROM mcr.microsoft.com/windows:1809
 
 # get app specs and set working directory
-COPY package.json "C:\Users\Public\theia\package.json"
-WORKDIR /Users/Public/theia
+COPY package.json "C:\Users\Public\galileo-ide\package.json"
+WORKDIR /Users/Public/galileo-ide
 
 # install scoop package manager, node, yarn, git and python
 RUN powershell.exe -NoLogo -Command "Set-ExecutionPolicy RemoteSigned -scope CurrentUser; iwr -UseBasicParsing 'https://get.scoop.sh' | iex;"

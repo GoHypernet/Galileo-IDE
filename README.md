@@ -31,7 +31,7 @@ FROM galileo-ide AS ide
 
 FROM mcr.microsoft.com/windows:1809
 
-COPY --from=ide "C:\Users\Public\theia" "C:\Users\Public\galileo_ide"
+COPY --from=ide "C:\Users\Public\galileo_ide" "C:\Users\Public\galileo_ide"
 
 WORKDIR /Users/Public/galileo_ide
 ```

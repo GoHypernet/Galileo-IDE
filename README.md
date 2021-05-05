@@ -1,6 +1,6 @@
 ![alt](./galileo_pres.png)
 
-# Galileo IDE
+# Galileo IDE - Windows
 
 The [Galileo](https://hypernetlabs.io/galileo/) IDE is based on the [Theia project](https://theia-ide.org/).
 Components are added via dependencies in package.json. Additional functionality can be added plugins which can
@@ -8,14 +8,11 @@ be specified at build-time via package.json or added during an active user sessi
 
 ![alt](./screenshot.png)
 
-The container runtime is currently built on top of the [continuumio/miniconda3](https://hub.docker.com/r/continuumio/miniconda3)
-base image. 
+The container runtime is built on top of the official `mcr.microsoft.com/windows:1809` base image. 
 
-The Galileo IDE provides authentication and reverse proxy functionality 
-via [Caddy 2](https://caddyserver.com/docs/) and uses supervisord for 
-the startup sequence. 
-
-Additional reverse-proxy ports can be added to the Caddyfile. 
+This branch builds a windows-compatible version of the Galileo IDE. It does not 
+include a server frontend or authentication; these must be provided by the end application
+that the IDE is imported into (i.e. through a multi-stage build).
 
 ## Build
 
@@ -24,24 +21,20 @@ the bottom of the Dockerfile. Then run the following command in the root of the 
 
 `docker build -t galileo-ide .`
 
-## Run
+## USE
 
-To launch an instance of the IDE, run:
+Import the image built from this repository as a stage of a multi-stage build. 
 
-`docker run -d --rm --name galileo-ide -p 8888:8888 galileo-ide`
+```
+FROM mcr.microsoft.com/windows:1809 AS ide
 
-Then open a webbrowser to http://127.0.0.1:8888. The username and password will be
-whatever is specified in the Dockerfile for the environment variables USERNAME and
-PASSWORD (i.e. myuser and testpass2 by default). 
+COPY --from=ide "C:\Users\Public\theia" "C:\Users\Public\galileo_ide"
 
-## Stop
+WORKDIR /Users/Public/galileo_ide
+```
 
-To stop the IDE, run:
+The command to start the IDE process would then be:
 
-`docker kill galileo-ide`
-
-## TODO: 
-- custom preview page (via @theia/preview dependency)
-- extensible reverse proxy options
-- working directory configuration
-- fix interactive execution window for python
+```
+node .\src-gen\backend\main.js C:\Users\Public --hostname=0.0.0.0
+```

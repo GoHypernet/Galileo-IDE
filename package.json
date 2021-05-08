@@ -6,15 +6,18 @@
                 "applicationName": "Galileo Editor",
                 "preferences": {
                     "files.enableTrash": false
-                }
+                },
+                "defaultTheme": "galileo-theme"
             }
         }
     },
     "dependencies": {
+        "@hypernetwork/galileo-ide-widget": "^1.0.0",
+        "@theia/core": "latest",
+        "@theia/editor": "latest",
+        "@theia/filesystem": "latest",
         "@theia/editor-preview": "latest",
         "@theia/file-search": "latest",
-        "@theia/getting-started": "latest",
-        "@theia/git": "latest",
         "@theia/markers": "latest",
         "@theia/messages": "latest",
         "@theia/monaco": "latest",
@@ -25,7 +28,10 @@
         "@theia/preview": "latest",
         "@theia/search-in-workspace": "latest",
         "@theia/terminal": "latest",
-        "@theia/vsx-registry": "latest"
+        "@theia/vsx-registry": "latest",
+        "@theia/task": "latest",
+        "@theia/plugin-dev": "latest",
+        "@theia/plugin-ext": "latest"
     },
     "devDependencies": {
         "@theia/cli": "latest"

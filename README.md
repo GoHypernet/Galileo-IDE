@@ -1,4 +1,4 @@
-![alt](./galileo_pres.png)
+[![alt](./galileo_pres.png)](https://hypernetlabs.io/galileo)
 
 # Galileo IDE
 

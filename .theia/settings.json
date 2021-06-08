@@ -1,0 +1,42 @@
+{
+    "galileo.logo": "https://cryptologos.cc/logos/algorand-algo-logo.svg?v=010",
+    "galileo.title": "Algorand",
+    "galileo.description": "Galileo IDE works!",
+    "galileo.widget_label": "Hello!",
+    "galileo.social_links": [
+        {
+        "icon": {
+            "prefix": "fab",
+            "name": "twitter"
+        },
+        "href": "https://twitter.com/GoHypernet",
+        "priority": 0
+        },
+        {
+        "icon": {
+            "prefix": "fab",
+            "name": "github"
+        },
+        "href": "https://github.com/GoHypernet",
+        "priority": 1
+        }
+    ],
+    "galileo.ui_components": [
+        {
+        "type": "custom",
+        "title": "Help",
+        "content": [
+            {
+            "title": "Printable keyboard cheatsheet",
+            "href": "https://pablotheflamingo.com/",
+            "priority": 0
+            },
+            {
+            "title": "Introductory videos",
+            "href": "https://pablotheflamingo.com/",
+            "priority": 1
+            }
+        ]
+        }
+    ]
+}

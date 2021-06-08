@@ -1,0 +1,398 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "logo": "https://cdn.worldvectorlogo.com/logos/tezos-1.svg",
+            "title": "Tezos",
+            "description": "Proof-of-Stake Network",
+            "widget_label": "Hello!",
+            "social_links": [
+                {
+                    "icon": {
+                        "prefix": "fab",
+                        "name": "twitter"
+                    },
+                    "href": "https://twitter.com/GoHypernet",
+                    "priority": 0
+                },
+                {
+                    "icon": {
+                        "prefix": "fab",
+                        "name": "github"
+                    },
+                    "href": "https://github.com/GoHypernet",
+                    "priority": 1
+                }
+            ],
+            "ui_components": [
+                {
+                    "type": "start",
+                    "title": "Start"
+                },
+                {
+                    "type": "custom",
+                    "title": "Help",
+                    "content": [
+                        {
+                            "title": "Printable keyboard cheatsheet",
+                            "href": "https://pablotheflamingo.com/",
+                            "priority": 0
+                        },
+                        {
+                            "title": "Introductory videos",
+                            "href": "https://pablotheflamingo.com/",
+                            "priority": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "required": [
+        "galileo.logo",
+        "galileo.title",
+        "galileo.description",
+        "galileo.widget_label",
+        "galileo.social_links",
+        "galileo.ui_components"
+    ],
+    "properties": {
+        "galileo.logo": {
+            "$id": "#/properties/logo",
+            "type": "string",
+            "title": "The logo schema",
+            "description": "Source of the mission type logo. Must be a valid url of the image.",
+            "default": "",
+            "examples": [
+                "https://cdn.worldvectorlogo.com/logos/tezos-1.svg"
+            ]
+        },
+        "galileo.title": {
+            "$id": "#/properties/title",
+            "type": "string",
+            "title": "The title schema",
+            "description": "The title of the mission type.",
+            "default": "",
+            "examples": [
+                "Tezos"
+            ]
+        },
+        "galileo.description": {
+            "$id": "#/properties/description",
+            "type": "string",
+            "title": "The description schema",
+            "description": "The description of the mission type.",
+            "default": "",
+            "examples": [
+                "Proof-of-Stake Network"
+            ]
+        },
+        "galileo.widget_label": {
+            "$id": "#/properties/widget_label",
+            "type": "string",
+            "title": "The widget_label schema",
+            "description": "The label to be displayed in the widget's tab.",
+            "default": "",
+            "examples": [
+                "Hello!"
+            ]
+        },
+        "galileo.social_links": {
+            "$id": "#/properties/social_links",
+            "type": "array",
+            "title": "The social_links schema",
+            "description": "Social media links to be rendered in the right-hand side of the widget.",
+            "default": [],
+            "examples": [
+                [
+                    {
+                        "icon": {
+                            "prefix": "fab",
+                            "name": "twitter"
+                        },
+                        "href": "https://twitter.com/GoHypernet",
+                        "priority": 0
+                    },
+                    {
+                        "icon": {
+                            "prefix": "fab",
+                            "name": "github"
+                        },
+                        "href": "https://github.com/GoHypernet",
+                        "priority": 1
+                    }
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/social_links/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/social_links/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "description": "A set of the social links.",
+                        "default": {},
+                        "examples": [
+                            {
+                                "icon": {
+                                    "prefix": "fab",
+                                    "name": "twitter"
+                                },
+                                "href": "https://twitter.com/GoHypernet",
+                                "priority": 0
+                            }
+                        ],
+                        "required": [
+                            "icon",
+                            "href",
+                            "priority"
+                        ],
+                        "properties": {
+                            "icon": {
+                                "$id": "#/properties/social_links/items/anyOf/0/properties/icon",
+                                "type": "object",
+                                "title": "The icon schema",
+                                "description": "The font awesome equivalent of the icon.",
+                                "default": {},
+                                "examples": [
+                                    {
+                                        "prefix": "fab",
+                                        "name": "twitter"
+                                    }
+                                ],
+                                "required": [
+                                    "prefix",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "prefix": {
+                                        "$id": "#/properties/social_links/items/anyOf/0/properties/icon/properties/prefix",
+                                        "enum": ["fab", "fas"],
+                                        "title": "The prefix schema",
+                                        "description": "The prefix of the font awesome icon. see: https://fontawesome.com/v5.15/how-to-use/on-the-web/referencing-icons/basic-use",
+                                        "default": "",
+                                        "examples": [
+                                            "fab",
+                                            "fas"
+                                        ]
+                                    },
+                                    "name": {
+                                        "$id": "#/properties/social_links/items/anyOf/0/properties/icon/properties/name",
+                                        "type": "string",
+                                        "title": "The name schema",
+                                        "description": "The name of the font awesome icon. see: https://fontawesome.com/v5.15/icons?d=gallery&p=2",
+                                        "default": "",
+                                        "examples": [
+                                            "twitter"
+                                        ]
+                                    }
+                                },
+                                "additionalProperties": true
+                            },
+                            "href": {
+                                "$id": "#/properties/social_links/items/anyOf/0/properties/href",
+                                "type": "string",
+                                "title": "The href schema",
+                                "description": "The url of the social media to be redirected to.",
+                                "default": "",
+                                "examples": [
+                                    "https://twitter.com/GoHypernet"
+                                ]
+                            },
+                            "priority": {
+                                "$id": "#/properties/social_links/items/anyOf/0/properties/priority",
+                                "type": "integer",
+                                "title": "The priority schema",
+                                "description": "The priority of the social link in the list.",
+                                "default": 0,
+                                "examples": [
+                                    0
+                                ]
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        },
+        "galileo.ui_components": {
+            "$id": "#/properties/ui_components",
+            "type": "array",
+            "title": "The ui_components schema",
+            "description": "UI components to be rendered after the tasks section.",
+            "default": [],
+            "examples": [
+                [
+                    {
+                        "type": "start",
+                        "title": "Start"
+                    },
+                    {
+                        "type": "custom",
+                        "title": "Help",
+                        "content": [
+                            {
+                                "title": "Printable keyboard cheatsheet",
+                                "href": "https://pablotheflamingo.com/",
+                                "priority": 0
+                            },
+                            {
+                                "title": "Introductory videos",
+                                "href": "https://pablotheflamingo.com/",
+                                "priority": 1
+                            }
+                        ]
+                    }
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/ui_components/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/ui_components/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "description": "A set of the ui components to be rendered in the widget.",
+                        "default": {},
+                        "examples": [
+                            {
+                                "type": "start",
+                                "title": "Start"
+                            },
+                            {
+                                "type": "custom",
+                                "title": "Help",
+                                "content": [
+                                    {
+                                        "title": "Printable keyboard cheatsheet",
+                                        "href": "https://pablotheflamingo.com/",
+                                        "priority": 0
+                                    },
+                                    {
+                                        "title": "Introductory videos",
+                                        "href": "https://pablotheflamingo.com/",
+                                        "priority": 1
+                                    }
+                                ]
+                            }
+                        ],
+                        "required": [
+                            "type",
+                            "title"
+                        ],
+                        "properties": {
+                            "type": {
+                                "$id": "#/properties/ui_components/items/anyOf/0/properties/type",
+                                "enum": ["custom", "start"],
+                                "title": "The type schema",
+                                "description": "The type of the ui component.",
+                                "default": "",
+                                "examples": [
+                                    "start"
+                                ]
+                            },
+                            "title": {
+                                "$id": "#/properties/ui_components/items/anyOf/0/properties/title",
+                                "type": "string",
+                                "title": "The title schema",
+                                "description": "The title of the ui component.",
+                                "default": "",
+                                "examples": [
+                                    "Start"
+                                ]
+                            },
+                            "content": {
+                                "$id": "#/properties/ui_components/items/anyOf/1/properties/content",
+                                "type": "array",
+                                "title": "The content schema",
+                                "description": "The content of the custom ui component.",
+                                "default": [],
+                                "examples": [
+                                    [
+                                        {
+                                            "title": "Printable keyboard cheatsheet",
+                                            "href": "https://pablotheflamingo.com/",
+                                            "priority": 0
+                                        },
+                                        {
+                                            "title": "Introductory videos",
+                                            "href": "https://pablotheflamingo.com/",
+                                            "priority": 1
+                                        }
+                                    ]
+                                ],
+                                "additionalItems": true,
+                                "items": {
+                                    "$id": "#/properties/ui_components/items/anyOf/1/properties/content/items",
+                                    "anyOf": [
+                                        {
+                                            "$id": "#/properties/ui_components/items/anyOf/1/properties/content/items/anyOf/0",
+                                            "type": "object",
+                                            "title": "The first anyOf schema",
+                                            "description": "The row of the custom component content.",
+                                            "default": {},
+                                            "examples": [
+                                                {
+                                                    "title": "Printable keyboard cheatsheet",
+                                                    "href": "https://pablotheflamingo.com/",
+                                                    "priority": 0
+                                                }
+                                            ],
+                                            "required": [
+                                                "title",
+                                                "href",
+                                                "priority"
+                                            ],
+                                            "properties": {
+                                                "title": {
+                                                    "$id": "#/properties/ui_components/items/anyOf/1/properties/content/items/anyOf/0/properties/title",
+                                                    "type": "string",
+                                                    "title": "The title schema",
+                                                    "description": "The title of the custom component content row.",
+                                                    "default": "",
+                                                    "examples": [
+                                                        "Printable keyboard cheatsheet"
+                                                    ]
+                                                },
+                                                "href": {
+                                                    "$id": "#/properties/ui_components/items/anyOf/1/properties/content/items/anyOf/0/properties/href",
+                                                    "type": "string",
+                                                    "title": "The href schema",
+                                                    "description": "The url to redirect the user of the custom component content row.",
+                                                    "default": "",
+                                                    "examples": [
+                                                        "https://pablotheflamingo.com/"
+                                                    ]
+                                                },
+                                                "priority": {
+                                                    "$id": "#/properties/ui_components/items/anyOf/1/properties/content/items/anyOf/0/properties/priority",
+                                                    "type": "integer",
+                                                    "title": "The priority schema",
+                                                    "description": "The priority of the custom component content row.",
+                                                    "default": 0,
+                                                    "examples": [
+                                                        0
+                                                    ]
+                                                }
+                                            },
+                                            "additionalProperties": true
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        }
+    },
+    "additionalProperties": true
+}

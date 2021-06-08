@@ -20,9 +20,9 @@ Additional reverse-proxy ports can be added to the Caddyfile.
 ## Build
 
 To build a local version of the IDE, first uncomment the basic authentication commands at
-the bottom of the Dockerfile. Generate an npm token and replace the token in the command [(Getting access tokens)](https://docs.npmjs.com/creating-and-viewing-access-tokens). Then run the following command in the root of the project:
+the bottom of the Dockerfile. Then run the following command in the root of the project:
 
-`docker build --build-arg NPM_TOKEN=${NPM_TOKEN} -t galileo-ide .`
+`docker build -t galileo-ide .`
 
 ## Run
 

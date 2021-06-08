@@ -4,15 +4,17 @@
         "frontend": {
             "config": {
                 "applicationName": "Galileo Editor",
-                "preferences": {
-                    "files.enableTrash": false
-                },
-                "defaultTheme": "galileo-theme"
+                "defaultTheme": "Galileo Dark"
+              }
+        },
+        "generator": {
+            "config": {
+              "preloadTemplate": "./preload.html"
             }
-        }
+          }
     },
     "dependencies": {
-        "@hypernetwork/galileo-ide-widget": "^1.0.0",
+        "@hypernetwork/galileo-ide-widget": "latest",
         "@theia/core": "latest",
         "@theia/editor": "latest",
         "@theia/filesystem": "latest",
@@ -41,6 +43,7 @@
     },
     "theiaPluginsDir": "plugins",
     "theiaPlugins": {
+        "galileo-theme": "https://github.com/GoHypernet/galileo-IDE-theme/releases/download/0.0.2/Hypernetlabs.galileo-theme-0.0.2.vsix",
         "vscode-builtin-bat": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/bat-1.39.1-prel.vsix",
         "vscode-builtin-clojure": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/clojure-1.39.1-prel.vsix",
         "vscode-builtin-coffeescript": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/coffeescript-1.39.1-prel.vsix",

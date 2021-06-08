@@ -14,9 +14,8 @@ RUN mkdir /theia
 WORKDIR /theia
 
 # build the IDE
-ARG NPM_TOKEN
-COPY .npmrc .
 COPY package.json .
+COPY preload.html .
 RUN yarn --pure-lockfile && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
     yarn theia download:plugins && \
@@ -26,14 +25,23 @@ RUN yarn --pure-lockfile && \
     echo *.ts.map >> .yarnclean && \
     echo *.spec.* >> .yarnclean && \
     yarn autoclean --force && \
-    yarn cache clean && rm -f .npmrc
+    yarn cache clean
 
 COPY supervisord.conf /etc/
 
 # make a non-root user
-RUN useradd -ms /bin/bash galileo
-USER galileo
+RUN useradd -ms /bin/bash hypernet
+
+# create workspace directory
+RUN mkdir /home/hypernet/workspaces
+RUN mkdir /home/hypernet/workspaces/galileo
+
+# copy ide user settings and give non-root user permissions to read them
+ADD .theia /home/hypernet/.theia
 WORKDIR /theia
+RUN chown -R hypernet:hypernet /home/hypernet/.theia
+RUN chmod 755 /home/hypernet/.theia
+USER hypernet
 
 # set environment variable to look for plugins in the correct directory
 ENV SHELL=/bin/bash \
@@ -47,8 +55,8 @@ COPY Caddyfile /etc/
 
 # set login credintials and write them to text file
 # uncomment these lines if testing locally
-ENV USERNAME "myuser"
-ENV PASSWORD "testpass2"
+ENV USERNAME "a"
+ENV PASSWORD "a"
 RUN echo "basicauth /* {" >> /tmp/hashpass.txt && \
     echo "    {env.USERNAME}" $(caddy hash-password -plaintext $(echo $PASSWORD)) >> /tmp/hashpass.txt && \
     echo "}" >> /tmp/hashpass.txt

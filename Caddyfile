@@ -1,14 +1,11 @@
 :8888 {
     log
-    root * /home/galileo
-    reverse_proxy :3000
+    root * \users\ContainerAdministrator
+    redir / /ui/
 
-    handle_path /proxy/8000/* {
-        reverse_proxy http://localhost:8000
+    handle_path /ui/* {
+        reverse_proxy http://localhost:3000
+        respond /passwordcheck/ "OK"
+        import "C:\Users\Public\caddy\hpassword.txt"
     }
-    handle_path /proxy/5000/* {
-        reverse_proxy  http://localhost:5000
-    }
-
-    import /tmp/hashpass.txt
 }

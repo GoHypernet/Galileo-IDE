@@ -1,0 +1,80 @@
+{
+    "tasks": [
+        {
+            "id": "tezos-identity-generate",
+            "label": "Generate Identity",
+            "description": "Generate a Tezos Identity.",
+            "missionType": "tezos",
+            "type": "shell",
+            "command": "tezos-node identity generate",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "command": "cmd.exe",
+                "args": [
+                    "/c",
+                    "task.bat",
+                    "windows abc"
+                ]
+            },
+            "linux": {
+                "args": [
+                    "linux 1",
+                    "linux 2",
+                    "linux 3"
+                ]
+            }
+        },
+        {
+            "id": "tezos-start-node",
+            "label": "Start Node",
+            "description": "Start Tezos Node",
+            "type": "shell",
+            "command": "tezos-node run",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "command": "cmd.exe",
+                "args": [
+                    "/c",
+                    "task.bat",
+                    "windows abc"
+                ]
+            },
+            "linux": {
+                "args": [
+                    "linux 1",
+                    "linux 2",
+                    "linux 3"
+                ]
+            }
+        },
+        {
+            "id": "tezos-stop-node",
+            "label": "Stop Node",
+            "description": "Stop Tezos Node",
+            "type": "shell",
+            "command": "tezos-node stop",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "command": "cmd.exe",
+                "args": [
+                    "/c",
+                    "task.bat",
+                    "windows abc"
+                ]
+            },
+            "linux": {
+                "args": [
+                    "linux 1",
+                    "linux 2",
+                    "linux 3"
+                ]
+            }
+        }
+    ]
+}

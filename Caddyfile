@@ -1,6 +1,6 @@
 :8888 {
     log
-    root * /home/galileo
+    root * /home/hypernet
     reverse_proxy :3000
 
     handle_path /proxy/8000/* {

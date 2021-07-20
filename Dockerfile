@@ -6,8 +6,8 @@ FROM continuumio/miniconda3
 # install node, yarn, and other tools
 RUN apt update -y && apt install vim curl gcc g++ make libx11-dev libxkbfile-dev supervisor -y && \
     curl -fsSL https://deb.nodesource.com/setup_12.x | bash - && \
-	apt install -y nodejs && \
-	npm install --global yarn
+    apt install -y nodejs && \
+    npm install --global yarn
 
 # create a build directory for the IDE
 RUN mkdir /theia
@@ -15,6 +15,7 @@ WORKDIR /theia
 
 # build the IDE
 COPY package.json .
+COPY preload.html .
 RUN yarn --pure-lockfile && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
     yarn theia download:plugins && \
@@ -25,13 +26,22 @@ RUN yarn --pure-lockfile && \
     echo *.spec.* >> .yarnclean && \
     yarn autoclean --force && \
     yarn cache clean
-	
+
 COPY supervisord.conf /etc/
 
 # make a non-root user
-RUN useradd -ms /bin/bash galileo
-USER galileo
+RUN useradd -ms /bin/bash hypernet
+
+# create workspace directory
+RUN mkdir /home/hypernet/workspaces
+RUN mkdir /home/hypernet/workspaces/galileo
+
+# copy ide user settings and give non-root user permissions to read them
+ADD .theia /home/hypernet/.theia
 WORKDIR /theia
+RUN chown -R hypernet:hypernet /home/hypernet/.theia
+RUN chmod 755 /home/hypernet/.theia
+USER hypernet
 
 # set environment variable to look for plugins in the correct directory
 ENV SHELL=/bin/bash \
@@ -45,10 +55,10 @@ COPY Caddyfile /etc/
 
 # set login credintials and write them to text file
 # uncomment these lines if testing locally
-#ENV USERNAME "myuser"
-#ENV PASSWORD "testpass2"
-#RUN echo "basicauth /* {" >> /tmp/hashpass.txt && \
-#    echo "    {env.USERNAME}" $(caddy hash-password -plaintext $(echo $PASSWORD)) >> /tmp/hashpass.txt && \
-#    echo "}" >> /tmp/hashpass.txt
+ENV USERNAME "a"
+ENV PASSWORD "a"
+RUN echo "basicauth /* {" >> /tmp/hashpass.txt && \
+    echo "    {env.USERNAME}" $(caddy hash-password -plaintext $(echo $PASSWORD)) >> /tmp/hashpass.txt && \
+    echo "}" >> /tmp/hashpass.txt
 
 CMD ["sh", "-c", "supervisord"]

@@ -1,0 +1,11 @@
+{
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "/.theia/settings.json"
+            ],
+            "url": "./widget-config.schema.json"
+        }
+    ]
+    
+}

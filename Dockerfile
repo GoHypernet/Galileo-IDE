@@ -1,13 +1,13 @@
-# get the caddy executable
-FROM caddy AS caddy-build
+FROM ubuntu:18.04
 
-FROM continuumio/miniconda3
+# enable noninteractive installation of deadsnakes/ppa
+# RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
 
 # install node, yarn, and other tools
-RUN apt update -y && apt install vim curl gcc g++ make libx11-dev libxkbfile-dev supervisor -y && \
+RUN apt update -y && apt install vim curl gcc g++ make libsecret-1-dev libx11-dev libxkbfile-dev supervisor -y && \
     curl -fsSL https://deb.nodesource.com/setup_12.x | bash - && \
-    apt install -y nodejs && \
-    npm install --global yarn
+	apt install -y nodejs && \
+	npm install --global yarn
 
 # create a build directory for the IDE
 RUN mkdir /theia
@@ -26,39 +26,5 @@ RUN yarn --pure-lockfile && \
     echo *.spec.* >> .yarnclean && \
     yarn autoclean --force && \
     yarn cache clean
-
-COPY supervisord.conf /etc/
-
-# make a non-root user
-RUN useradd -ms /bin/bash hypernet
-
-# create workspace directory
-RUN mkdir /home/hypernet/workspaces
-RUN mkdir /home/hypernet/workspaces/galileo
-
-# copy ide user settings and give non-root user permissions to read them
-ADD .theia /home/hypernet/.theia
-WORKDIR /theia
-RUN chown -R hypernet:hypernet /home/hypernet/.theia
-RUN chmod 755 /home/hypernet/.theia
-USER hypernet
-
-# set environment variable to look for plugins in the correct directory
-ENV SHELL=/bin/bash \
-    THEIA_DEFAULT_PLUGINS=local-dir:/theia/plugins
-ENV USE_LOCAL_GIT true
-
-# get the Caddy server executable
-# copy the caddy server build into this container
-COPY --from=caddy-build /usr/bin/caddy /usr/bin/caddy
-COPY Caddyfile /etc/
-
-# set login credintials and write them to text file
-# uncomment these lines if testing locally
-ENV USERNAME "a"
-ENV PASSWORD "a"
-RUN echo "basicauth /* {" >> /tmp/hashpass.txt && \
-    echo "    {env.USERNAME}" $(caddy hash-password -plaintext $(echo $PASSWORD)) >> /tmp/hashpass.txt && \
-    echo "}" >> /tmp/hashpass.txt
-
-CMD ["sh", "-c", "supervisord"]
+    
+ENTRYPOINT ["tar", "-czvf", "/root/galileo-ide-linux.tar.gz", "/theia"]

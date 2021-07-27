@@ -6,7 +6,7 @@ The [Galileo](https://hypernetlabs.io/galileo/) IDE is based on the [Theia proje
 Components are added via dependencies in package.json. Additional functionality can be added plugins which can
 be specified at build-time via package.json or added during an active user session through the plugin manager.
 
-![alt](./screenshot.png)
+![alt](./galileo-ide.gif)
 
 The build environment is currently based on the [ubuntu:18.04](https://hub.docker.com/_/ubuntu)
 base image.

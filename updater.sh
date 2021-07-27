@@ -17,7 +17,8 @@ function download_update() {
     curl -L $(cat download_url.txt) > galileo_ide.tar.gz
     tar -xvf galileo_ide.tar.gz
     rm galileo_ide.tar.gz
-    mv latest_ide_version.txt current_ide_version.txt
+    rm -rf /home/galileo/.galileo-ide
+    mv ./theia /home/galileo/.galileo-ide
 }
 
 cmp --silent latest_ide_version.txt current_ide_version.txt && \

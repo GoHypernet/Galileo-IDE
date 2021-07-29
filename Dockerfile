@@ -27,4 +27,7 @@ RUN yarn --pure-lockfile && \
     yarn autoclean --force && \
     yarn cache clean
     
+COPY updater.sh .
+COPY current_ide_version.txt .
+	
 ENTRYPOINT ["tar", "-czvf", "/root/galileo-ide-linux.tar.gz", "/theia"]

@@ -1,8 +1,5 @@
 FROM ubuntu:18.04
 
-# enable noninteractive installation of deadsnakes/ppa
-# RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
-
 # install node, yarn, and other tools
 RUN apt update -y && apt install vim curl gcc g++ make libsecret-1-dev libx11-dev libxkbfile-dev supervisor -y && \
     curl -fsSL https://deb.nodesource.com/setup_12.x | bash - && \
@@ -10,8 +7,8 @@ RUN apt update -y && apt install vim curl gcc g++ make libsecret-1-dev libx11-de
 	npm install --global yarn
 
 # create a build directory for the IDE
-RUN mkdir /theia
-WORKDIR /theia
+RUN mkdir /.galileo-ide
+WORKDIR /.galileo-ide
 
 # build the IDE
 COPY package.json .
@@ -30,4 +27,4 @@ RUN yarn --pure-lockfile && \
 COPY updater.sh .
 COPY current_ide_version.txt .
 	
-ENTRYPOINT ["tar", "-czvf", "/root/galileo-ide-linux.tar.gz", "/theia"]
+ENTRYPOINT ["tar", "-czvf", "/root/galileo-ide-linux.tar.gz", "/.galileo-ide"]

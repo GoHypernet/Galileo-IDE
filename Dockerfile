@@ -1,3 +1,7 @@
+FROM caddy:builder as caddy-build
+
+RUN xcaddy build --with github.com/greenpau/caddy-auth-jwt --with github.com/greenpau/caddy-auth-portal
+
 FROM ubuntu:18.04
 
 # install node, yarn, and other tools
@@ -26,5 +30,11 @@ RUN yarn --pure-lockfile && \
     
 COPY updater.sh .
 COPY current_ide_version.txt .
+
+RUN mkdir /caddy
+COPY users.json /caddy/.
+COPY header.html /caddy/.
+COPY auth.txt /caddy/.
+COPY --from=caddy-build /usr/bin/caddy /caddy/.
 	
 ENTRYPOINT ["tar", "-czvf", "/root/galileo-ide-linux.tar.gz", "/.galileo-ide"]

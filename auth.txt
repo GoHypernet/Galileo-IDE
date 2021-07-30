@@ -1,0 +1,31 @@
+        route /auth* {
+                authp {
+                crypto default token lifetime 3600
+                crypto key sign-verify 0e2fdcf8-6868-41a7-884b-7308795fc286
+                backends {
+                        local_backend {
+                                method local
+                                path /etc/gatekeeper/users.json
+                                realm local
+                        }
+                }
+                ui {
+                        logo url "https://storage.googleapis.com/mission_types/h_logo.png"
+                        custom html header path /etc/assets/header.html
+                }
+                cookie insecure on
+
+                }
+        }
+
+        route /ui* {
+                jwt {
+                        primary yes
+                        crypto key verify 0e2fdcf8-6868-41a7-884b-7308795fc286
+                        set auth url /auth
+                        allow roles authp/admin
+                        allow roles superadmin
+                }
+                        uri strip_prefix /ui
+                        reverse_proxy http://localhost:3000
+        }

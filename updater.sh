@@ -17,7 +17,7 @@ if test -e /home/galileo/.galileo-ide/current_ide_version.txt; then
          /tmp/download_url.txt
        echo "Downloading $(cat /tmp/download_url.txt)"
        curl -L $(cat /tmp/download_url.txt) > /home/galileo/.galileo-ide/galileo_ide.tar.gz
-       tar -xvf /home/galileo/.galileo-ide/galileo_ide.tar.gz -C /home/galileo/.galileo-ide
+       tar -xvf /home/galileo/.galileo-ide/galileo_ide.tar.gz -C /home/galileo/
        rm /home/galileo/.galileo-ide/galileo_ide.tar.gz
        nohup supervisorctl restart galileo-ide > /tmp/nohup.out
    }

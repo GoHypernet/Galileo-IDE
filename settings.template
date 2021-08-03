@@ -68,7 +68,7 @@
         </div>
         <div class="col s12 l9 app-content">
           {{ if eq .Data.view "general" }}
-            <p>You can change your password or add MFA keys.</p>
+            <p>You can change your password or add MFA keys to your Galileo job session.</p>
           {{ end }}
           {{ if eq .Data.view "mfa" }}
           <div class="row right">

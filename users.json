@@ -24,11 +24,6 @@
     {
       "id": "cd5f647a-cc04-4ae2-9d0a-2d5e9b95cf98",
       "username": "",
-      "email_addresses": [
-        {
-          "address": "webadmin@localdomain.local",
-          "domain": "localdomain.local"
-        }
       ],
       "passwords": [
         {

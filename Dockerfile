@@ -35,6 +35,7 @@ RUN mkdir /caddy
 COPY users.json /caddy/.
 COPY header.html /caddy/.
 COPY auth.txt /caddy/.
+COPY settings.template /caddy/.
 COPY --from=caddy-build /usr/bin/caddy /caddy/.
 	
 ENTRYPOINT ["tar", "-czvf", "/root/galileo-ide-linux.tar.gz", "/.galileo-ide"]

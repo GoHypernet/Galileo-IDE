@@ -14,9 +14,8 @@
           }
     },
     "dependencies": {
-        "@hypernetwork/galileo-ide-widget": "1.1.7",
-        "@hypernetwork/galileo-ide-password-widget": "1.0.0",
-        "@hypernetwork/galileo-ide-storj-widget": "1.1.2",
+        "@hypernetwork/galileo-ide-widget": "1.2.2",
+        "@hypernetwork/galileo-ide-storj-widget": "1.1.4",
         "@theia/editor-preview": "latest",
         "@theia/file-search": "latest",
         "@theia/markers": "latest",

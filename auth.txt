@@ -17,6 +17,7 @@
                 ui {
                         theme basic
                         template settings "/etc/gatekeeper/assets/settings.template"
+                        template login "/etc/gatekeeper/assets/login.template"
                         logo url "https://storage.googleapis.com/mission_types/h_logo.png"
                         custom html header path /etc/assets/header.html
                 }
@@ -35,4 +36,7 @@
                 }
                         uri strip_prefix /ui
                         reverse_proxy http://localhost:3000
+        }
+        
+        handle_path /favicon.ico {
         }
